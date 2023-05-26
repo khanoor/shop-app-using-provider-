@@ -32,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
               "Please login to continue",
               style: descriptionText,
             ),
-            spaceBeteen,
+            spaceBetween,
             TextFormField(
               controller: mobileNo,
               keyboardType: TextInputType.number,
@@ -46,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
                     borderRadius: BorderRadius.circular(20.0)),
               ),
             ),
-            spaceBeteen,
+            spaceBetween,
             Center(
               child: MainButton(
                 title: "Send OTP",

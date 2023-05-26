@@ -15,7 +15,7 @@ class AppColors {
   static const Color lightBlack = Color(0XFF808080);
 }
 
-SizedBox spaceBeteen = SizedBox(height: 8.h);
+SizedBox spaceBetween = SizedBox(height: 8.h);
 
 switchScreenPush(context, screen) {
   return Navigator.push(
