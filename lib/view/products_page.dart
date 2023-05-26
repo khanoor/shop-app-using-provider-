@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:producthub/global/global.dart';
+import 'package:producthub/view/product_detail.dart';
 import 'package:producthub/view_model/filter_product_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -94,33 +95,65 @@ class _ProductsPageState extends State<ProductsPage> {
                 spaceBetween,
                 Expanded(
                   child: SingleChildScrollView(
-                    child: GridView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: 5,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 4,
-                          mainAxisSpacing: 4),
-                      itemBuilder: (_, index) {
-                        return Container(
-                          decoration: BoxDecoration(
-                              boxShadow: [BoxShadow(blurRadius: 1.0)],
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.white),
-                          child: Column(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Image.asset(
-                                  "assets/1.jpg",
-                                  fit: BoxFit.contain,
-                                ),
-                              )
-                            ],
-                          ),
-                        );
-                      },
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 8.h,
+                      ),
+                      child: GestureDetector(
+                        onTap: () => switchScreenPush(context, ProductDetail()),
+                        child: GridView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: 5,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  crossAxisSpacing: 6,
+                                  mainAxisExtent: 200.h,
+                                  mainAxisSpacing: 6),
+                          itemBuilder: (_, index) {
+                            return Container(
+                              decoration: BoxDecoration(
+                                  // boxShadow: [BoxShadow(blurRadius: 1.0)],
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.white),
+                              child: Column(
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(30),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Image.asset(
+                                        "assets/1.jpg",
+                                        fit: BoxFit.contain,
+                                        width: 250.w,
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          "Product Name ",
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                              fontSize: 20.sp,
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                        Text(
+                                          '\$ Price',
+                                          style: descriptionText,
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      ),
                     ),
                   ),
                 )

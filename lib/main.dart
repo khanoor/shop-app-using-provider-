@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:producthub/view/login_page.dart';
+import 'package:producthub/view_model/favorite_view_model.dart';
 import 'package:producthub/view_model/filter_product_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => FilterProduct()),
+        ChangeNotifierProvider(create: (_) => FavoriteProduct()),
       ],
       child: ScreenUtilInit(
           designSize: const Size(360, 800),
