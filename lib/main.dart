@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:producthub/utils/routes/rotus.dart';
+import 'package:producthub/utils/routes/routes_name.dart';
 import 'package:producthub/view/login_page.dart';
 import 'package:producthub/view_model/favorite_view_model.dart';
 import 'package:producthub/view_model/filter_product_view_model.dart';
@@ -33,6 +35,8 @@ class MyApp extends StatelessWidget {
                 primarySwatch: Colors.blue,
               ),
               debugShowCheckedModeBanner: false,
+              initialRoute: RoutesName.LoginPage,
+              onGenerateRoute: Routes.generateRoute,
               home: LoginPage(),
             );
           }),
