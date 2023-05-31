@@ -4,6 +4,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:another_flushbar/flushbar_route.dart';
 
+import '../global/global.dart';
+
 class Utils {
   static toastMessage(String message) {
     Fluttertoast.showToast(msg: message);
@@ -28,5 +30,17 @@ class Utils {
             color: Colors.white,
           ),
         )..show(context));
+  }
+
+  static showSnackBarText(String message, BuildContext context) {
+    return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      backgroundColor: Colors.redAccent,
+      behavior: SnackBarBehavior.floating,
+      duration: Duration(seconds: 3),
+      content: SelectableText(
+        message,
+        style: const TextStyle(color: AppColors.whiteColor),
+      ),
+    ));
   }
 }

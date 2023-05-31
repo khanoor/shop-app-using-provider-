@@ -7,20 +7,27 @@ import 'package:http/http.dart' as http;
 class NetworkApiService extends BaseApiServices {
   @override
   Future getGetResponse(String url) async {
-
     dynamic responseJosn;
     try {
       final response =
           await http.get(Uri.parse(url)).timeout(Duration(seconds: 10));
     } on SocketException {
-      throw FetchDatException("No Internet connection");
+      throw FetchDataException("No Internet connection");
     }
     return responseJosn;
   }
 
   @override
-  Future getPostApiResponse(String url) {
-    // TODO: implement getPostApiResponse
-    throw UnimplementedError();
+  Future getPostApiResponse(String url, dynamic data) async {
+    dynamic responseJson;
+    try {
+      final response = await http
+          .post(Uri.parse(url), body: data)
+          .timeout(const Duration(seconds: 10));
+      responseJson = response.body;
+    } on SocketException {
+      throw FetchDataException("No Internet Connection");
+    }
+    return responseJson;
   }
 }

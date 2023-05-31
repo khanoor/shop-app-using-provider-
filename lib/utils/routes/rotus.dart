@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:producthub/utils/routes/routes_name.dart';
 import 'package:producthub/view/product_detail.dart';
+import 'package:producthub/view/splash.dart';
 import '../../view/login_page.dart';
 
 class Routes {
@@ -12,6 +13,9 @@ class Routes {
       case RoutesName.LoginPage:
         return MaterialPageRoute(
             builder: (BuildContext context) => const LoginPage());
+      case RoutesName.splashScreen:
+        return MaterialPageRoute(
+            builder: (BuildContext context) => const Splash());
       default:
         return MaterialPageRoute(builder: (_) {
           return Scaffold(

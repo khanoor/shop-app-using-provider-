@@ -8,8 +8,8 @@ class AppException implements Exception {
   }
 }
 
-class FetchDatException extends AppException {
-  FetchDatException([String? message]) : super(message, 'Error');
+class FetchDataException extends AppException {
+  FetchDataException([String? message]) : super(message, 'Error');
 }
 
 class BadRequestException extends AppException {
