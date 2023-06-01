@@ -93,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
                 style: descriptionText,
               ),
               spaceBetween,
-              screenState == 0
+              screenState == 1
                   ? Column(
                       children: [
                         TextFormField(
