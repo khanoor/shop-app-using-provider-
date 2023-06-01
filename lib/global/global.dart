@@ -6,7 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 TextStyle headingText = TextStyle(
     color: Colors.black, fontSize: 30.sp, fontWeight: FontWeight.w600);
 
-TextStyle descriptionText = TextStyle(color: Colors.grey);
+TextStyle descriptionText = TextStyle(color: Colors.grey, fontSize: 14.sp);
+TextStyle normalText = TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold);
 
 class AppColors {
   static const Color blackColor = Color(0XFF373737);

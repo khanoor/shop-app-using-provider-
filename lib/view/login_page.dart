@@ -4,7 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:producthub/global/global.dart';
 import 'package:producthub/global/main_buttons.dart';
-import 'package:producthub/view/products_page.dart';
+import 'package:producthub/view/home_page.dart';
 import 'package:producthub/view_model/filter_product_view_model.dart';
 
 import '../utils/utils.dart';
@@ -61,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
         if (result.user != null) {
           Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (context) => ProductsPage()),
+              MaterialPageRoute(builder: (context) => HomePage()),
               (route) => false);
         }
       }).catchError((e) {
@@ -81,7 +81,6 @@ class _LoginPageState extends State<LoginPage> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Center(child: Image.asset("assets/login.png")),
@@ -94,85 +93,82 @@ class _LoginPageState extends State<LoginPage> {
                 style: descriptionText,
               ),
               spaceBetween,
-              IntlPhoneField(
-                controller: phoneController,
-                showCountryFlag: true,
-                flagsButtonPadding: EdgeInsets.only(left: 20),
-                showDropdownIcon: false,
-                disableLengthCheck: false,
-                initialValue: countryDial,
-                onCountryChanged: (country) {
-                  setState(() {
-                    countryDial = "+" + country.dialCode;
-                  });
-                },
-                decoration: InputDecoration(
-                  counterText: "",
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
-                  contentPadding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                ),
-              ),
-              spaceBetween,
-              // TextFormField(
-              //   controller: mobileNo,
-              //   keyboardType: TextInputType.number,
-              //   decoration: InputDecoration(
-              //     border: OutlineInputBorder(),
-              //     hintText: "Enter Mobile Number",
-              //     enabledBorder: OutlineInputBorder(
-              //       borderRadius: BorderRadius.circular(20.0),
-              //     ),
-              //     focusedBorder: OutlineInputBorder(
-              //         borderRadius: BorderRadius.circular(20.0)),
-              //   ),
-              // ),
-              // spaceBetween,
-              Center(
-                child: MainButton(
-                  loading: sendOtpLoading,
-                  title: "Send OTP",
-                  onPressed: () {
-                    setState(() {
-                      sendOtpLoading = !sendOtpLoading;
-                      if (phoneController.text != "") {
-                        verifyPhone(countryDial + phoneController.text);
-                      } else {
-                        Utils.flushBarErrorMessage(
-                            "Please Enter Mobile Number", context);
-                            sendOtpLoading = false;
-                      }
-                    });
-                  },
-                ),
-              ),
-              spaceBetween,
-              TextFormField(
-                controller: otp,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: "Enter OTP",
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20.0)),
-                ),
-              ),
-              spaceBetween,
-              Center(
-                child: MainButton(
-                  title: "Login",
-                  onPressed: () {
-                    if (mobileNo.text.isEmpty) {
-                      Utils.flushBarErrorMessage("Please Enter OTP", context);
-                    }
-                    switchScreenPush(context, ProductsPage());
-                  },
-                ),
-              ),
+              screenState == 0
+                  ? Column(
+                      children: [
+                        TextFormField(
+                          controller: otp,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: "Enter OTP",
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20.0)),
+                          ),
+                        ),
+                        spaceBetween,
+                        Center(
+                          child: MainButton(
+                            title: "Login",
+                            onPressed: () {
+                              if (mobileNo.text.isEmpty) {
+                                Utils.flushBarErrorMessage(
+                                    "Please Enter OTP", context);
+                              }
+                              switchScreenPush(context, HomePage());
+                            },
+                          ),
+                        ),
+                      ],
+                    )
+                  : Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IntlPhoneField(
+                          controller: phoneController,
+                          showCountryFlag: true,
+                          flagsButtonPadding: EdgeInsets.only(left: 20),
+                          showDropdownIcon: false,
+                          disableLengthCheck: false,
+                          initialValue: countryDial,
+                          onCountryChanged: (country) {
+                            setState(() {
+                              countryDial = "+" + country.dialCode;
+                            });
+                          },
+                          decoration: InputDecoration(
+                            counterText: "",
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                          ),
+                        ),
+                        spaceBetween,
+                        Center(
+                          child: MainButton(
+                            loading: sendOtpLoading,
+                            title: "Send OTP",
+                            onPressed: () {
+                              setState(() {
+                                sendOtpLoading = !sendOtpLoading;
+                                if (phoneController.text != "") {
+                                  verifyPhone(
+                                      countryDial + phoneController.text);
+                                } else {
+                                  Utils.flushBarErrorMessage(
+                                      "Please Enter Mobile Number", context);
+                                  sendOtpLoading = false;
+                                }
+                              });
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
             ],
           ),
         ),

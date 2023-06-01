@@ -1,9 +1,10 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:producthub/global/global.dart';
 import 'package:producthub/view/login_page.dart';
-import 'package:producthub/view/products_page.dart';
+import 'package:producthub/view/home_page.dart';
 import 'package:producthub/view_model/filter_product_view_model.dart';
 
 class Splash extends StatefulWidget {
@@ -12,6 +13,9 @@ class Splash extends StatefulWidget {
   @override
   State<Splash> createState() => _SplashState();
 }
+
+final auth = FirebaseAuth.instance;
+final user = FirebaseAuth.instance.currentUser;
 
 class _SplashState extends State<Splash> {
   void initState() {
@@ -25,8 +29,12 @@ class _SplashState extends State<Splash> {
   }
 
   void navigationPage() async {
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => LoginPage()));
+    if (user != null) {
+      switchScreenReplacement(context, HomePage());
+    } else {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => LoginPage()));
+    }
   }
 
   @override

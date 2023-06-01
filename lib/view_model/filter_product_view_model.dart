@@ -5,12 +5,17 @@ import '../model/product_model.dart';
 
 class FilterProduct with ChangeNotifier {
   bool _isSelected = false;
-  List index = [];
+  List number = [];
   bool get isSelected => _isSelected;
 
   void selectedProduct(bool value, int num) {
     _isSelected = value;
-    index.add(num);
+    number.add(num);
+    notifyListeners();
+  }
+
+  void removeProduct(int num) {
+    number.remove(num);
     notifyListeners();
   }
 }
