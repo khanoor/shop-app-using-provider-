@@ -6,12 +6,23 @@ import '../data/network/baseapiService.dart';
 class AuthRepository {
   final BaseApiServices _apiServices = NetworkApiService();
 
-  Future<dynamic> loginApi(dynamic data) async {
+  Future<dynamic> getProductDetails() async {
     try {
-      dynamic response =
-          await _apiServices.getPostApiResponse(baseApi.productApi, data);
+      dynamic response = await _apiServices.getGetResponse(
+        baseApi.productApi,
+      );
+      return response;
     } catch (e) {
       throw e;
     }
   }
+
+  // Future<dynamic> loginApi(dynamic data) async {
+  //   try {
+  //     dynamic response =
+  //         await _apiServices.getPostApiResponse(baseApi.productApi, data);
+  //   } catch (e) {
+  //     throw e;
+  //   }
+  // }
 }

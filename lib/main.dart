@@ -36,10 +36,12 @@ class MyApp extends StatelessWidget {
               theme: ThemeData(
                 primarySwatch: Colors.blue,
               ),
+              
               debugShowCheckedModeBanner: false,
               initialRoute: RoutesName.splashScreen,
               onGenerateRoute: Routes.generateRoute,
               home: LoginPage(),
+              
             );
           }),
     );

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:producthub/data/app_exceptions.dart';
@@ -11,6 +12,7 @@ class NetworkApiService extends BaseApiServices {
     try {
       final response =
           await http.get(Uri.parse(url)).timeout(Duration(seconds: 10));
+      responseJosn = jsonDecode(response.body);
     } on SocketException {
       throw FetchDataException("No Internet connection");
     }

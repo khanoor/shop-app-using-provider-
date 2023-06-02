@@ -33,7 +33,7 @@ switchScreenPush(context, screen) {
 }
 
 switchScreenReplacement(context, screen) {
-  return Navigator.pop(
+  return Navigator.pushReplacement(
       context,
       PageRouteBuilder(
           pageBuilder: (context, _, __) => screen,

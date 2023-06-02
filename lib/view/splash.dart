@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:producthub/global/global.dart';
 import 'package:producthub/view/login_page.dart';
 import 'package:producthub/view/home_page.dart';
-import 'package:producthub/view_model/filter_product_view_model.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
