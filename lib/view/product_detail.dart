@@ -1,19 +1,33 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:producthub/global/global.dart';
 import 'package:provider/provider.dart';
 
+import '../model/product_model.dart';
 import '../view_model/favorite_view_model.dart';
 
 class ProductDetail extends StatefulWidget {
-  const ProductDetail({super.key});
+  ProductDescription description;
+  ProductDetail({super.key, required this.description});
 
   @override
   State<ProductDetail> createState() => _ProductDetailState();
 }
 
 class _ProductDetailState extends State<ProductDetail> {
+  final urlImages = [
+    "https://img.freepik.com/free-photo/vivid-blurred-colorful-background_58702-2655.jpg?w=2000",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2ImMEdy2t-vl_Cf0HGxnOLiPwUgCIZlGn4g&usqp=CAU",
+    "https://static.vecteezy.com/system/resources/previews/001/984/880/original/abstract-colorful-geometric-overlapping-background-and-texture-free-vector.jpg",
+  ];
+  buildImage(String urlImage, int index) => Container(
+        margin: EdgeInsets.symmetric(horizontal: 12),
+        color: Colors.white,
+        width: double.infinity,
+        child: Image(image: NetworkImage(urlImage)),
+      );
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -36,10 +50,11 @@ class _ProductDetailState extends State<ProductDetail> {
                         builder: (BuildContext context, value, Widget? child) {
                       return GestureDetector(
                           onTap: () {
-                            value.selectFavorite(!value.isfavorite);
+                            value.favItem.add(1);
+                            // value.selectFavorite(index);
                           },
                           child: Icon(
-                            value.isfavorite
+                            value.favItem.contains(5)
                                 ? Icons.favorite
                                 : Icons.favorite_border,
                             size: 30,
@@ -51,26 +66,39 @@ class _ProductDetailState extends State<ProductDetail> {
                   height: 20.h,
                 ),
                 Text(
-                  "Product Name size: 40,size: 40,size: 40,size: 40,size: 40,",
+                  "${widget.description.title}",
                   textAlign: TextAlign.left,
                   style: headingText,
                 ),
                 spaceBetween,
                 Text(
-                  "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+                  "${widget.description.description}",
                   style: descriptionText,
                 ),
                 spaceBetween,
-                Container(
-                  height: 300.h,
-                  child: Image.asset("assets/1.jpg"),
+                CarouselSlider.builder(
+                  itemCount: widget.description.images!.length,
+                  options: CarouselOptions(
+                    autoPlay: false,
+                    reverse: true,
+                  ),
+                  itemBuilder: (context, index, realIndex) {
+                    final urlImage = "${widget.description.images![index]}"[index];
+                    return buildImage("${widget.description.images![index]}", index);
+                  },
                 ),
+                Container(
+                    height: 300.h,
+                    child: Image(
+                        image: NetworkImage("${widget.description.thumbnail}"))
+                    // Image.asset("assets/1.jpg"),
+                    ),
                 RatingBar.builder(
                     allowHalfRating: true,
                     itemSize: 20,
                     ignoreGestures: true,
                     updateOnDrag: false,
-                    initialRating: 3.1,
+                    initialRating: widget.description.rating!.toDouble(),
                     direction: Axis.horizontal,
                     itemCount: 5,
                     itemBuilder: (context, _) => Icon(
@@ -100,7 +128,9 @@ class _ProductDetailState extends State<ProductDetail> {
                         Row(
                           children: [
                             Expanded(child: Text("Price: ", style: normalText)),
-                            Expanded(child: Text(" \$ 4565", style: normalText))
+                            Expanded(
+                                child: Text(" \$ ${widget.description.price}",
+                                    style: normalText))
                           ],
                         ),
                         Row(
@@ -110,19 +140,21 @@ class _ProductDetailState extends State<ProductDetail> {
                               "Brand: ",
                               style: normalText,
                             )),
-                            Expanded(child: Text("APPLE", style: normalText))
+                            Expanded(
+                                child: Text("${widget.description.brand}",
+                                    style: normalText))
                           ],
                         ),
                         Row(
                           children: [
                             Expanded(
                                 child: Text(
-                              "Category: ",
+                              "Category:  ",
                               style: normalText,
                             )),
                             Expanded(
                                 child: Text(
-                              "MOBILE",
+                              "${widget.description.category}",
                               style: normalText,
                             ))
                           ],
@@ -136,7 +168,7 @@ class _ProductDetailState extends State<ProductDetail> {
                             )),
                             Expanded(
                                 child: Text(
-                              "50",
+                              "${widget.description.stock}",
                               style: normalText,
                             ))
                           ],

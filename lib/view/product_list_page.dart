@@ -86,23 +86,27 @@ class _ProductListState extends State<ProductList> {
                           padding: EdgeInsets.symmetric(
                             vertical: 8.h,
                           ),
-                          child: GestureDetector(
-                            onTap: () =>
-                                switchScreenPush(context, ProductDetail()),
-                            child: GridView.builder(
-                              physics: NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              itemCount: value.productList.length,
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      crossAxisSpacing: 6,
-                                      mainAxisExtent: 200.h,
-                                      mainAxisSpacing: 6),
-                              itemBuilder: (_, index) {
-                                return 
-                                        value.productList[index].category==value.catName
-                                    ? Container(
+                          child: GridView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: value.productList.length,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    crossAxisSpacing: 6,
+                                    mainAxisExtent: 200.h,
+                                    mainAxisSpacing: 6),
+                            itemBuilder: (_, index) {
+                              return value.productList[index].category ==
+                                      value.catName
+                                  ? GestureDetector(
+                                      onTap: () => switchScreenPush(
+                                          context,
+                                          ProductDetail(
+                                            description:
+                                                value.productList[index],
+                                          )),
+                                      child: Container(
                                         decoration: BoxDecoration(
                                             // boxShadow: [BoxShadow(blurRadius: 1.0)],
                                             borderRadius:
@@ -148,14 +152,13 @@ class _ProductListState extends State<ProductList> {
                                             )
                                           ],
                                         ),
-                                      )
-                                    : Container();
-                              },
-                            ),
+                                      ))
+                                  : Container();
+                            },
                           ),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),

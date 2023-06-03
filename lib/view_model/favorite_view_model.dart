@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class FavoriteProduct with ChangeNotifier {
-  bool isfavorite = false;
-  // bool get favorite => _isfavorite;
+  // List<int> _favItem = [];
+  List<int> favItem = [];
 
-  void selectFavorite(bool value) {
-    isfavorite = value;
+  get productList => null;
+
+  void selectFavorite(int value) {
+    favItem.add(value);
     notifyListeners();
   }
 }

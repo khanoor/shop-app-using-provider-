@@ -7,9 +7,6 @@ import '../../view/login_page.dart';
 class Routes {
   static MaterialPageRoute generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case RoutesName.ProductDetail:
-        return MaterialPageRoute(
-            builder: (BuildContext context) => const ProductDetail());
       case RoutesName.LoginPage:
         return MaterialPageRoute(
             builder: (BuildContext context) => const LoginPage());
