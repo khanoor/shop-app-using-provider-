@@ -7,6 +7,7 @@ TextStyle headingText = TextStyle(
     color: Colors.black, fontSize: 30.sp, fontWeight: FontWeight.w600);
 
 TextStyle descriptionText = TextStyle(color: Colors.grey, fontSize: 14.sp);
+TextStyle text2 = TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold);
 TextStyle normalText = TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold);
 
 class AppColors {

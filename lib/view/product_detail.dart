@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:producthub/global/global.dart';
+import 'package:producthub/global/main_buttons.dart';
+import 'package:producthub/view/payment_page.dart';
 import 'package:provider/provider.dart';
 
 import '../model/product_model.dart';
@@ -83,16 +85,12 @@ class _ProductDetailState extends State<ProductDetail> {
                     reverse: true,
                   ),
                   itemBuilder: (context, index, realIndex) {
-                    final urlImage = "${widget.description.images![index]}"[index];
-                    return buildImage("${widget.description.images![index]}", index);
+                    final urlImage =
+                        "${widget.description.images![index]}"[index];
+                    return buildImage(
+                        "${widget.description.images![index]}", index);
                   },
                 ),
-                Container(
-                    height: 300.h,
-                    child: Image(
-                        image: NetworkImage("${widget.description.thumbnail}"))
-                    // Image.asset("assets/1.jpg"),
-                    ),
                 RatingBar.builder(
                     allowHalfRating: true,
                     itemSize: 20,
@@ -176,7 +174,15 @@ class _ProductDetailState extends State<ProductDetail> {
                       ],
                     ),
                   ),
-                )
+                ),
+                spaceBetween,
+                MainButton(
+                    title: "Buy Now",
+                    onPressed: () {
+                      switchScreenPush(context, PaymentPage());
+                    }),
+                spaceBetween,
+                MainButton(title: "Add to cart", onPressed: () {})
               ],
             ),
           ),
