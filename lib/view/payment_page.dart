@@ -6,8 +6,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:producthub/global/global.dart';
 import 'package:producthub/global/main_buttons.dart';
 
+import '../model/product_model.dart';
+
 class PaymentPage extends StatefulWidget {
-  const PaymentPage({super.key});
+  ProductDescription description;
+  PaymentPage({super.key, required this.description});
 
   @override
   State<PaymentPage> createState() => _PaymentPageState();
@@ -111,7 +114,8 @@ class _PaymentPageState extends State<PaymentPage> {
                 children: [
                   SizedBox(
                     height: 50.h,
-                    child: Image.asset("assets/2.jpg"),
+                    child: Image(
+                        image: NetworkImage("${widget.description.thumbnail}")),
                   ),
                   SizedBox(
                     width: 10.w,
@@ -119,10 +123,10 @@ class _PaymentPageState extends State<PaymentPage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("PRODUCT NAME"),
+                      Text(widget.description.title.toString()),
                       Row(
                         children: [
-                          Text("Price: \$ 465"),
+                          Text("Price: \$${widget.description.price}"),
                         ],
                       ),
                     ],
@@ -130,7 +134,9 @@ class _PaymentPageState extends State<PaymentPage> {
                 ],
               ),
               spaceBetween,
-              MainButton(title: "Paynow \$625", onPressed: () {})
+              MainButton(
+                  title: "Paynow \$${widget.description.price}",
+                  onPressed: () {})
             ],
           ),
         ),

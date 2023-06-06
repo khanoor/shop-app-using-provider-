@@ -19,17 +19,13 @@ class ProductDetail extends StatefulWidget {
 }
 
 class _ProductDetailState extends State<ProductDetail> {
-  final urlImages = [
-    "https://img.freepik.com/free-photo/vivid-blurred-colorful-background_58702-2655.jpg?w=2000",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2ImMEdy2t-vl_Cf0HGxnOLiPwUgCIZlGn4g&usqp=CAU",
-    "https://static.vecteezy.com/system/resources/previews/001/984/880/original/abstract-colorful-geometric-overlapping-background-and-texture-free-vector.jpg",
-  ];
   buildImage(String urlImage, int index) => Container(
         margin: EdgeInsets.symmetric(horizontal: 12),
         color: Colors.white,
         width: double.infinity,
         child: Image(image: NetworkImage(urlImage)),
       );
+  List<int> selectedItem = [];
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -52,11 +48,15 @@ class _ProductDetailState extends State<ProductDetail> {
                         builder: (BuildContext context, value, Widget? child) {
                       return GestureDetector(
                           onTap: () {
-                            value.favItem.add(1);
-                            // value.selectFavorite(index);
+                            if (value.selectedItem
+                                .contains(widget.description)) {
+                              value.removeItem(widget.description);
+                            } else {
+                              value.addItem(widget.description);
+                            }
                           },
                           child: Icon(
-                            value.favItem.contains(5)
+                            value.selectedItem.contains(widget.description.id)
                                 ? Icons.favorite
                                 : Icons.favorite_border,
                             size: 30,
@@ -127,7 +127,7 @@ class _ProductDetailState extends State<ProductDetail> {
                           children: [
                             Expanded(child: Text("Price: ", style: normalText)),
                             Expanded(
-                                child: Text(" \$ ${widget.description.price}",
+                                child: Text("\$ ${widget.description.price}",
                                     style: normalText))
                           ],
                         ),
@@ -179,7 +179,7 @@ class _ProductDetailState extends State<ProductDetail> {
                 MainButton(
                     title: "Buy Now",
                     onPressed: () {
-                      switchScreenPush(context, PaymentPage());
+                      switchScreenPush(context, PaymentPage(description: widget.description,));
                     }),
                 spaceBetween,
                 MainButton(title: "Add to cart", onPressed: () {})

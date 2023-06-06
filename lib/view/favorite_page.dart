@@ -20,7 +20,7 @@ class _FavoritePageState extends State<FavoritePage> {
     return SafeArea(child: Scaffold(
       body: SingleChildScrollView(
         child: Consumer<FilterProduct>(
-          builder: (BuildContext context, value, Widget? child) { 
+            builder: (BuildContext context, value, Widget? child) {
           return Consumer<FavoriteProduct>(
               builder: (BuildContext context, value, Widget? child) {
             return Padding(
@@ -31,69 +31,74 @@ class _FavoritePageState extends State<FavoritePage> {
                   SizedBox(
                     height: 20.h,
                   ),
-                  ListView.builder(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: 20,
-                      itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: () => switchScreenPush(
-                              context,
-                              ProductDetail(
-                                description: value.productList[index],
-                              )),
-                          child: Container(
-                            width: double.infinity,
-                            margin: EdgeInsets.only(bottom: 6.h),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  height: 50.h,
-                                  child: Image.asset("assets/2.jpg"),
-                                ),
-                                SizedBox(
-                                  width: 10.w,
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                  value.selectedItem.length == 0
+                      ? Center(
+                          child: Text(
+                            "No favorite item",
+                            style: text2,
+                          ),
+                        )
+                      : ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: value.selectedItem.length,
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: () {},
+                              child: Container(
+                                width: double.infinity,
+                                margin: EdgeInsets.only(bottom: 6.h),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Text("PRODUCT NAME"),
-                                    Row(
+                                    SizedBox(
+                                      height: 50.h,
+                                      child: Image.asset("assets/2.jpg"),
+                                    ),
+                                    SizedBox(
+                                      width: 10.w,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        Text("Price: \$ 465"),
-                                        SizedBox(
-                                          width: 20.w,
+                                        Text("PRODUCT NAME"),
+                                        Row(
+                                          children: [
+                                            Text("Price: \$ 465"),
+                                            SizedBox(
+                                              width: 20.w,
+                                            ),
+                                            Text("Stock: 684"),
+                                          ],
                                         ),
-                                        Text("Stock: 684"),
                                       ],
                                     ),
+                                    Spacer(),
+                                    GestureDetector(
+                                        onTap: () {
+                                          
+                                        },
+                                        child: Icon(
+                                          // value.fa
+                                          //     ? Icons.favorite
+                                          //     :
+                                          Icons.favorite_border,
+                                          size: 30,
+                                        )
+                                        ),
                                   ],
                                 ),
-                                Spacer(),
-                                GestureDetector(
-                                    onTap: () {
-                                      value.favItem;
-                                    },
-                                    child: Icon(
-                                      // value.fa
-                                      //     ? Icons.favorite
-                                      //     :
-                                      Icons.favorite_border,
-                                      size: 30,
-                                    )),
-                              ],
-                            ),
-                          ),
-                        );
-                      }),
+                              ),
+                            );
+                          }),
                 ],
               ),
             );
-          });}
-        ),
+          });
+        }),
       ),
     ));
   }

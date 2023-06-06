@@ -12,16 +12,16 @@ class FilterProduct with ChangeNotifier {
   String catName = '';
   bool get isSelected => _isSelected;
 
-  void selectedProduct(bool value, int num) {
-    _isSelected = value;
-    number.add(num);
-    notifyListeners();
-  }
+  // void selectedProduct(bool value, int num) {
+  //   _isSelected = value;
+  //   number.add(num);
+  //   notifyListeners();
+  // }
 
-  void removeProduct(int num) {
-    number.remove(num);
-    notifyListeners();
-  }
+  // void removeProduct(int num) {
+  //   number.remove(num);
+  //   notifyListeners();
+  // }
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -30,10 +30,10 @@ class FilterProduct with ChangeNotifier {
     _isLoading = value;
   }
 
-  void setcatName(String value) {
-    catName = value;
-    notifyListeners();
-  }
+  // void setcatName(String value) {
+  //   catName = value;
+  //   notifyListeners();
+  // }
 
   List<ProductDescription> productList = [];
   List category = [];
