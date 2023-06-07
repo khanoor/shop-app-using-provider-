@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:producthub/view/product_detail.dart';
 import 'package:provider/provider.dart';
 import '../global/global.dart';
+import '../model/product_model.dart';
 import '../view_model/filter_product_view_model.dart';
 
 class ProductList extends StatefulWidget {
@@ -15,11 +16,12 @@ class ProductList extends StatefulWidget {
 
 class _ProductListState extends State<ProductList> {
   @override
-  // void initState() {
-  //   final p = Provider.of<FilterProduct>(context, listen: false);
-  //   p.getProductDetails(context);
-  //   super.initState();
-  // }
+  void initState() {
+    final p = Provider.of<FilterProduct>(context, listen: false);
+    p.getProductDetails(context);
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +40,7 @@ class _ProductListState extends State<ProductList> {
           child: Column(
             children: [
               TextFormField(
+                onChanged: onSerachDestination,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: "Search ",
@@ -91,13 +94,13 @@ class _ProductListState extends State<ProductList> {
                     child: GridView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      itemCount: 2,
+                      itemCount: value.productList.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           crossAxisSpacing: 6,
                           mainAxisExtent: 200.h,
                           mainAxisSpacing: 6),
-                      itemBuilder: ( Builder, index) {
+                      itemBuilder: (Builder, index) {
                         return
                             // value.productList[index].category ==
                             //         value.catName
@@ -145,7 +148,7 @@ class _ProductListState extends State<ProductList> {
                                             ),
                                           ],
                                         ),
-                                      )
+                                      ),
                                     ],
                                   ),
                                 ));
@@ -154,11 +157,31 @@ class _ProductListState extends State<ProductList> {
                   ),
                 ),
               ),
-              
             ],
           ),
         ),
       ));
     });
+  }
+
+  onSerachDestination(String text) {
+    final serachData = Provider.of<FilterProduct>(context, listen: false);
+
+    final List<ProductDescription> filter = [];
+    serachData.tempSearch.map((value) {
+      if (value.title!.toLowerCase().contains(text.toString().toLowerCase())
+          //     ||
+          // value.destinationCode
+          //     .toLowerCase()
+          //     .contains(text.toString().toLowerCase()) ||
+          // value.countryName.contains(text.toString().toLowerCase()) ||
+          // value.countryIsoCode
+          //     .toLowerCase()
+          //     .contains(text.toString().toLowerCase())
+          ) {
+        filter.add(value);
+      }
+    }).toList();
+    serachData.setSearchData(filter);
   }
 }

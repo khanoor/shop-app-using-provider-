@@ -8,6 +8,8 @@ import '../repository/auth_repository.dart';
 
 class FilterProduct with ChangeNotifier {
   bool _isSelected = false;
+  List<ProductDescription> tempSearch = [];
+  List serachData = [];
   List number = [];
   String catName = '';
   bool get isSelected => _isSelected;
@@ -30,6 +32,11 @@ class FilterProduct with ChangeNotifier {
     _isLoading = value;
   }
 
+  void setSearchData(List<ProductDescription> data) {
+    productList = data;
+    notifyListeners();
+  }
+
   // void setcatName(String value) {
   //   catName = value;
   //   notifyListeners();
@@ -49,6 +56,7 @@ class FilterProduct with ChangeNotifier {
         ProductDescription model = ProductDescription.fromJson(element);
         productList.add(model);
         category.add(model.category);
+        tempSearch.add(model);
       });
       category = category.toSet().toList();
 
