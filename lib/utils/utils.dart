@@ -10,6 +10,7 @@ class Utils {
   static toastMessage(String message) {
     Fluttertoast.showToast(msg: message);
   }
+
   static void flushBarErrorMessage(String message, BuildContext context) {
     showFlushbar(
         context: context,
@@ -42,5 +43,11 @@ class Utils {
         style: const TextStyle(color: AppColors.whiteColor),
       ),
     ));
+  }
+
+  static void fieldFocusChange(
+      BuildContext context, FocusNode current, FocusNode nextFocus) {
+    current.unfocus();
+    FocusScope.of(context).requestFocus(nextFocus);
   }
 }

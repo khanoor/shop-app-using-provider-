@@ -6,6 +6,7 @@ import 'package:producthub/utils/routes/routes_name.dart';
 import 'package:producthub/view/login_page.dart';
 import 'package:producthub/view_model/favorite_view_model.dart';
 import 'package:producthub/view_model/filter_product_view_model.dart';
+import 'package:producthub/view_model/login_post_view_model.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => FilterProduct()),
         ChangeNotifierProvider(create: (_) => FavoriteProduct()),
+        ChangeNotifierProvider(create: (_) => AuthViewModel()),
       ],
       child: ScreenUtilInit(
           designSize: const Size(360, 800),
@@ -36,12 +38,10 @@ class MyApp extends StatelessWidget {
               theme: ThemeData(
                 primarySwatch: Colors.blue,
               ),
-              
               debugShowCheckedModeBanner: false,
               initialRoute: RoutesName.splashScreen,
               onGenerateRoute: Routes.generateRoute,
               home: LoginPage(),
-              
             );
           }),
     );

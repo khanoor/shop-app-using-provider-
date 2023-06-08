@@ -17,6 +17,16 @@ class AuthRepository {
     }
   }
 
+  Future<dynamic> postLoginApi(dynamic data) async {
+    try {
+      dynamic response =
+          await _apiServices.getPostApiResponse(baseApi.loginApi, data);
+          return response;
+    } catch (e) {
+      throw e;
+    }
+  }
+
   // Future<dynamic> loginApi(dynamic data) async {
   //   try {
   //     dynamic response =

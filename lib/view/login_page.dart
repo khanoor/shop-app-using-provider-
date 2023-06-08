@@ -18,6 +18,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController mobileNo = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController otp = TextEditingController();
+  FocusNode otpFocusNode = FocusNode();
   String otpPin = "";
   String countryDial = "+91";
   String verID = "";
@@ -95,6 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       TextFormField(
                         controller: otp,
+                        focusNode: otpFocusNode,
                         onChanged: (value) {
                           setState(() {
                             otpPin = value;
@@ -112,6 +114,9 @@ class _LoginPageState extends State<LoginPage> {
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20.0)),
                         ),
+                        // onFieldSubmitted: (value) {
+                        //   Utils.fieldFocusChange(context, current, nextFocus)
+                        // },
                       ),
                       spaceBetween,
                       MainButton(

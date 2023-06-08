@@ -1,7 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:producthub/global/global.dart';
+import 'package:producthub/global/main_buttons.dart';
 import 'package:producthub/view/login_page.dart';
+import 'package:producthub/view/test_post.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({super.key});
@@ -37,6 +40,13 @@ class _SettingPageState extends State<SettingPage> {
                   Text("Logout", style: descriptionText)
                 ],
               ),
+            ),
+            SizedBox(
+              height: 100.h,
+            ),
+            MainButton(
+              title: "TEST API",
+              onPressed: () => switchScreenPush(context, TestLogin()),
             )
           ],
         ),
