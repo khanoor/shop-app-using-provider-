@@ -26,6 +26,7 @@ class _ProductDetailState extends State<ProductDetail> {
         child: Image(image: NetworkImage(urlImage)),
       );
   List<int> selectedItem = [];
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -48,19 +49,21 @@ class _ProductDetailState extends State<ProductDetail> {
                         builder: (BuildContext context, value, Widget? child) {
                       return GestureDetector(
                           onTap: () {
-                            if (value.selectedItem
+                            if (value.testProduct
                                 .contains(widget.description)) {
-                              value.removeItem(widget.description);
+                              value.removeTest(widget.description);
                             } else {
-                              value.addItem(widget.description);
+                              value.addTest(widget.description);
                             }
+                            print(value.testProduct);
                           },
                           child: Icon(
-                            value.selectedItem.contains(widget.description.id)
+                            value.testProduct.contains(widget.description)
                                 ? Icons.favorite
                                 : Icons.favorite_border,
                             size: 30,
-                          ));
+                          )
+                          );
                     }),
                   ],
                 ),
@@ -179,7 +182,11 @@ class _ProductDetailState extends State<ProductDetail> {
                 MainButton(
                     title: "Buy Now",
                     onPressed: () {
-                      switchScreenPush(context, PaymentPage(description: widget.description,));
+                      switchScreenPush(
+                          context,
+                          PaymentPage(
+                            description: widget.description,
+                          ));
                     }),
                 spaceBetween,
                 MainButton(title: "Add to cart", onPressed: () {})

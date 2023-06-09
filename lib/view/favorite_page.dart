@@ -31,7 +31,7 @@ class _FavoritePageState extends State<FavoritePage> {
                   SizedBox(
                     height: 20.h,
                   ),
-                  value.selectedItem.length == 0
+                  value.testProduct.length == 0
                       ? Center(
                           child: Text(
                             "No favorite item",
@@ -41,7 +41,7 @@ class _FavoritePageState extends State<FavoritePage> {
                       : ListView.builder(
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
-                          itemCount: value.selectedItem.length,
+                          itemCount: value.testProduct.length,
                           itemBuilder: (context, index) {
                             return GestureDetector(
                               onTap: () {},
@@ -54,9 +54,11 @@ class _FavoritePageState extends State<FavoritePage> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     SizedBox(
-                                      height: 50.h,
-                                      child: Image.asset("assets/2.jpg"),
-                                    ),
+                                        height: 50.h,
+                                        child: Image(
+                                            image: NetworkImage(value
+                                                .testProduct[index]
+                                                .thumbnail))),
                                     SizedBox(
                                       width: 10.w,
                                     ),
@@ -64,14 +66,16 @@ class _FavoritePageState extends State<FavoritePage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text("PRODUCT NAME"),
+                                        Text(value.testProduct[index].title),
                                         Row(
                                           children: [
-                                            Text("Price: \$ 465"),
+                                            Text(
+                                                "Price: \$ ${value.testProduct[index].price}"),
                                             SizedBox(
                                               width: 20.w,
                                             ),
-                                            Text("Stock: 684"),
+                                            Text(
+                                                "Stock: ${value.testProduct[index].stock}"),
                                           ],
                                         ),
                                       ],
@@ -79,16 +83,12 @@ class _FavoritePageState extends State<FavoritePage> {
                                     Spacer(),
                                     GestureDetector(
                                         onTap: () {
-                                          
-                                        },
+                                          // value.testProduct.remove(value.testProduct[index]);
+                                          },
                                         child: Icon(
-                                          // value.fa
-                                          //     ? Icons.favorite
-                                          //     :
-                                          Icons.favorite_border,
+                                          Icons.favorite,
                                           size: 30,
-                                        )
-                                        ),
+                                        )),
                                   ],
                                 ),
                               ),
