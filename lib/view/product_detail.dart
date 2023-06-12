@@ -6,7 +6,6 @@ import 'package:producthub/global/global.dart';
 import 'package:producthub/global/main_buttons.dart';
 import 'package:producthub/view/payment_page.dart';
 import 'package:provider/provider.dart';
-
 import '../model/product_model.dart';
 import '../view_model/favorite_view_model.dart';
 

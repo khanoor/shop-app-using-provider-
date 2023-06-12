@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:producthub/global/global.dart';
 import 'package:producthub/global/main_buttons.dart';
+import 'package:producthub/view/product_detail.dart';
 
 import '../model/product_model.dart';
 
@@ -109,29 +110,33 @@ class _PaymentPageState extends State<PaymentPage> {
                 ],
               ),
               spaceBetween,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 50.h,
-                    child: Image(
-                        image: NetworkImage("${widget.description.thumbnail}")),
-                  ),
-                  SizedBox(
-                    width: 10.w,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(widget.description.title.toString()),
-                      Row(
-                        children: [
-                          Text("Price: \$${widget.description.price}"),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
+              GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 50.h,
+                      child: Image(
+                          image:
+                              NetworkImage("${widget.description.thumbnail}")),
+                    ),
+                    SizedBox(
+                      width: 10.w,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(widget.description.title.toString()),
+                        Row(
+                          children: [
+                            Text("Price: \$${widget.description.price}"),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
               spaceBetween,
               MainButton(
