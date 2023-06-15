@@ -162,7 +162,7 @@ class _LoginPageState extends State<LoginPage> {
                         loading: sendOtpLoading,
                         title: "Send OTP",
                         onPressed: () {
-                          switchScreenPush(context, HomePage());
+                          // switchScreenPush(context, HomePage());
                           setState(() {
                             sendOtpLoading = !sendOtpLoading;
                             if (phoneController.text != "") {
