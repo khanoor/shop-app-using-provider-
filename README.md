@@ -1,16 +1,6 @@
-# producthub
+# shopping app
 
-A new Flutter project.
+![My project-1](https://github.com/khanoor/shopping-app/assets/22651410/9e0f5605-f84a-4899-a902-d7a7bd214ad5)
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
